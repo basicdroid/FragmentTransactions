@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private void addFragmentA() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragment_container, FragmentA.newInstance(), FragmentA.TAG);
+        ft.addToBackStack("add");
         ft.commit();
     }
 
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragmentA = getSupportFragmentManager().findFragmentByTag(FragmentA.TAG);
         ft.remove(fragmentA);
         ft.add(R.id.fragment_container, FragmentB.newInstance(), FragmentB.TAG);
+        ft.addToBackStack("removeAThenAddB");
 
         ft.commit();
     }
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragmentBWithFragmentA() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, FragmentA.newInstance(), FragmentA.TAG);
+        ft.addToBackStack("replace");
         ft.commit();
     }
 
@@ -91,12 +94,14 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment fragmentB = getSupportFragmentManager().findFragmentByTag(FragmentB.TAG);
         ft.remove(fragmentB);
+        ft.addToBackStack("removeB");
         ft.commit();
     }
 
     private void attachFragmentA() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.attach(FragmentA.newInstance());
+        ft.addToBackStack("attach");
         ft.commit();
     }
 
@@ -104,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment fragmentA = getSupportFragmentManager().findFragmentByTag(FragmentA.TAG);
         ft.detach(fragmentA);
+        ft.addToBackStack("detach");
         ft.commit();
     }
 }
