@@ -2,12 +2,18 @@ package com.training.android.fragmenttransactions;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        FragmentManager.OnBackStackChangedListener {
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnRemoveB = (Button) findViewById(R.id.btnRemoveB);
         Button btnAttachA = (Button) findViewById(R.id.btnAttachA);
         Button btnDetachA = (Button) findViewById(R.id.btnDetachA);
+        Button btnGoToPrev = (Button) findViewById(R.id.btnGoToPrev);
 
         // Set appropriate listener actions..
         btnAddA.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
                 detachFragmentA();
             }
         });
+
+        btnGoToPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPrevious();
+            }
+        });
+
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
     private void addFragmentA() {
@@ -111,5 +127,28 @@ public class MainActivity extends AppCompatActivity {
         ft.detach(fragmentA);
         ft.addToBackStack("detach");
         ft.commit();
+    }
+
+    private void goToPrevious() {
+        getSupportFragmentManager().popBackStack();
+    }
+
+    private void logBackStackEntry(FragmentManager.BackStackEntry entry) {
+        if (entry != null) {
+            Log.i(TAG, "BackStackEntry: " + entry.getName());
+        } else {
+            Log.i(TAG, "BackStackEntry: <NULL>");
+        }
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        Toast.makeText(this, "Backstack Changed", Toast.LENGTH_SHORT).show();
+        Log.i(TAG, "The following are the back stack entries");
+
+        FragmentManager fm = getSupportFragmentManager();
+        for (int i = 0; i < fm.getBackStackEntryCount(); i++) {
+            logBackStackEntry(fm.getBackStackEntryAt(i));
+        }
     }
 }
