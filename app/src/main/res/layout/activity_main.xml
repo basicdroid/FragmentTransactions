@@ -1,17 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.training.android.fragmenttransactions.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-</RelativeLayout>
+        android:layout_weight="1"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2">
+
+        <Button
+            android:id="@+id/btnAddA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Fragment A"/>
+
+        <Button
+            android:id="@+id/btnRemAAddB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove A then Add B"/>
+
+        <Button
+            android:id="@+id/btnReplaceBWithA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Replace B With A"/>
+
+        <Button
+            android:id="@+id/btnRemoveB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove B"/>
+
+        <Button
+            android:id="@+id/btnAttachA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Attach Fragment A"/>
+
+        <Button
+            android:id="@+id/btnDetachA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detach Fragment A"/>
+    </GridLayout>
+</LinearLayout>
