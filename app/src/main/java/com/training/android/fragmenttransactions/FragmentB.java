@@ -11,10 +11,14 @@ import android.view.ViewGroup;
 
 public class FragmentB extends Fragment {
 
-    private static final String TAG = "Fragment_B";
+    public static final String TAG = "Fragment_B";
 
     public FragmentB() {
         // Required empty public constructor
+    }
+
+    public static FragmentB newInstance() {
+        return new FragmentB();
     }
 
     @Override
